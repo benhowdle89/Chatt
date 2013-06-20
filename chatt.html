@@ -1,0 +1,35 @@
+<head>
+  <title>chatt</title>
+</head>
+
+<body>
+	<div class="wrap">
+		<h1>Chatt</h1>
+		{{> input}}
+		{{> messages}}
+	</div>
+</body>
+
+<template name="input">
+	<div id="input" class="well">
+		<strong>Your message</strong>
+		<textarea class="input-xlarge" rows="3" id="newMessage"></textarea>
+		<input type="text" class="input-xlarge" placeholder="Your name..." id="username" />
+		<a class="btn btn-primary" id="send">Send</a>
+	</div>
+</template>
+
+<template name="messages">
+	<div id="messages">
+		{{#each messages}}
+			{{> message}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="message">
+	<blockquote>
+		<p>{{message}}</p>
+		<small>{{username}}</small>
+	</blockquote>
+</template>
