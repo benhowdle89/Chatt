@@ -1,7 +1,7 @@
 Messages = new Meteor.Collection("Messages");
 
 if (Meteor.isClient) {
-  Template.messages.messages = function () {
+  Template.messages.messages = function() {
     return Messages.find({
 
     }, {
@@ -13,10 +13,10 @@ if (Meteor.isClient) {
   };
 
   Template.input.events({
-    'click #send' : function () {
+    'click #send': function() {
       var message = $('#newMessage').val();
       var username = $('#username').val();
-      if(!message || !username){
+      if (!message || !username) {
         alert('Fill out both fields yo!');
       }
       Meteor.saveMessage({
@@ -40,6 +40,14 @@ if (Meteor.isClient) {
       username: username,
       message: message,
       timestamp: Date.now()
+    }, function(err, id) {
+      if (err) {
+        alert('Fill out both fields yo!');
+      }
+      if (id) {
+        $('#newMessage').val('');
+        $('#username').val('');
+      }
     });
   };
 
@@ -57,10 +65,10 @@ if (Meteor.isServer) {
 
   Messages.allow({
     'insert': function(userId, doc) {
-        return true;
+      return true;
     },
     'remove': function(userId, doc) {
-        return false;
+      return true;
     }
   });
 }
